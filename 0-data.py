@@ -14,6 +14,18 @@ Train = pd.read_csv("data/training.csv",sep = ";",encoding = "utf-8")
 
 Train.head
 Train.columns.values.tolist()
+
+#1. predire la categorie1
+#
+Train['Categorie1'].unique()
+Train['Categorie1']==340
+for cat1 in Train['Categorie1'].unique() :
+    print(cat1)
+    print(Train.loc[Train['Categorie1']==cat1].shape)
+    print(len(Train.loc[Train['Categorie1']==cat1]['Categorie2'].unique()))
+    print("___________________________")
+
+
 #file = open("data/training.csv")
 #
 #for i in range(100): 
