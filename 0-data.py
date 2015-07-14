@@ -12,6 +12,8 @@ import re
 import nltk
 from bs4 import BeautifulSoup 
 from unidecode import unidecode
+#nltk.download()
+
 #some french stop words
 stopwords = ['au', 'aux', 'avec',
 'ce', 'ces', 'dans', 'de', 'des',
@@ -44,10 +46,10 @@ stopwords = ['au', 'aux', 'avec',
 'eussions', 'eussiez', 'eussent']
 stopwords = set(stopwords) 
 
-from nltk.corpus import brown
-brown.words()
-
-os.chdir("D:/Users/Benjamin/Documents/Data Science/CDiscount/")
+if(sys.version == "2.7.6 (default, Jun 22 2015, 17:58:13) \n[GCC 4.8.2]") :
+    os.chdir("/home/benjamin/Documents/CDiscount/")
+else :
+    os.chdir("D:/Users/Benjamin/Documents/Data Science/CDiscount/")
 Train = pd.read_csv("data/training.csv",sep = ";",encoding = "utf-8")
 
 Train.head
@@ -90,7 +92,8 @@ for description in Train["Description"] :
 print(time.clock() - start_time, "seconds")
 #4777 s.
 
-Train.save("data/trainingClean-Words.csv") 
+Train.save("data/trainingClean.csv",encoding = "utf-8", sep = ";") 
+
 
 
 normalize_review(Train["Description"][0])
