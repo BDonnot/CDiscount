@@ -5,6 +5,7 @@ Created on Sun Jun 28 12:23:58 2015
 @author: Benjamin
 """
 import os
+import sys
 import numpy as np
 import pandas as pd
 import sklearn
@@ -66,13 +67,13 @@ print(Train.shape)
 
 
 
-def normalize_review( review,stopwords=stopwords):
+def normalize_review( description,stopwords=stopwords):
     # 1. Remove HTML
-    review = BeautifulSoup(review).get_text() 
+    description = BeautifulSoup(description).get_text() 
     # 2. range everything in ascii
-    review = unidecode(review)
+    description = unidecode(description)
     # 3. Remove non-letters letters_onlyCC
-    letters_only = re.sub("[^a-zA-Z]", " ", review) 
+    letters_only = re.sub("[^a-zA-Z]", " ", description) 
     # 4. Convert to lower case, split into individual words
     words = letters_only.lower().split()
     # 5. Remove stop words
@@ -84,7 +85,7 @@ def normalize_review( review,stopwords=stopwords):
 import time
 start_time = time.clock()
 i = 0
-for description in Train["Description"] :
+for description in Train["Description"]:
     Train["Description"][i] = normalize_review(description)
     i += 1
     if(i % 10000 == 0) :
@@ -92,15 +93,15 @@ for description in Train["Description"] :
 print(time.clock() - start_time, "seconds")
 #4777 s.
 
-Train.save("data/trainingClean.csv",encoding = "utf-8", sep = ";") 
+Train.to_csv("data/trainingClean.csv", sep = ";" ,index = 0 , encoding  = "utf-8") 
 
-
-
-normalize_review(Train["Description"][0])
-Train["Description"][0] = Train["Description"][0]
-Train["DescriptionClean"] = 0
-Train["DescriptionClean"][3546]
-#file = open("data/training.csv")
+#TraiTest = pd.read_csv("data/trainingClean.csv",sep = ";",encoding = "utf-8")
+#
+#normalize_review(Train["Description"][0])
+#Train["Description"][0] = Train["Description"][0]
+#Train["DescriptionClean"] = 0
+#Train["DescriptionClean"][3546]
+##file = open("data/training.csv")
 #
 #for i in range(100): 
 #    print(file.readline())
