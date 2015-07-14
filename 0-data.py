@@ -92,6 +92,8 @@ for description in Train["Description"]:
         print("%d/%d" % (i,Train.shape[0]))
 print(time.clock() - start_time, "seconds")
 #4777 s.
+# 5042
+
 
 Train.to_csv("data/trainingClean.csv", sep = ";" ,index = 0 , encoding  = "utf-8") 
 
