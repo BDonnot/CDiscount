@@ -52,15 +52,15 @@ Train = pd.read_csv("data/training.csv",sep = ";",encoding = "utf-8")
 
 Train.head
 Train.columns.values.tolist()
-
-#1. predire la categorie1
-Train['Categorie1'].unique()
-Train['Categorie1']==340
-for cat1 in Train['Categorie1'].unique() :
-    print(cat1)
-    print(Train.loc[Train['Categorie1']==cat1].shape)
-    print(len(Train.loc[Train['Categorie1']==cat1]['Categorie2'].unique()))
-    print("___________________________")
+print(Train.shape)
+##1. predire la categorie1
+#Train['Categorie1'].unique()
+#Train['Categorie1']==340
+#for cat1 in Train['Categorie1'].unique() :
+#    print(cat1)
+#    print(Train.loc[Train['Categorie1']==cat1].shape)
+#    print(len(Train.loc[Train['Categorie1']==cat1]['Categorie2'].unique()))
+#    print("___________________________")
 
 
 
@@ -78,11 +78,19 @@ def normalize_review( review,stopwords=stopwords):
     # 6. Join the words back into one string separated by space, 
     # and return the result.
     return( " ".join( meaningful_words ))   
-    
+
+import time
+start_time = time.clock()
+i = 0
 for description in Train["Description"] :
-    Train["Description"] = normalize_review(description)
-    
-Train.save("data/trainingClean.csv") 
+    Train["Description"][i] = normalize_review(description)
+    i += 1
+    if(i % 10000 == 0) :
+        print("%d/%d" % (i,Train.shape[0]))
+print(time.clock() - start_time, "seconds")
+#4777 s.
+
+Train.save("data/trainingClean-Words.csv") 
 
 
 normalize_review(Train["Description"][0])
