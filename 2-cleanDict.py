@@ -39,6 +39,7 @@ print(time.clock() - start_time, "seconds")
 #around 1 min
 
 dClean = {key : value for (key,value) in d.iteritems() if value > 50}
+dClean = {key : value for (key,value) in d.items() if value > 50}
 dCleanLi = [el for el in dClean]
 dCleanLi.sort()
 sortedUniqueDescr= pd.Series(dCleanLi)
