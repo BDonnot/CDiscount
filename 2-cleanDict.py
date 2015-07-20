@@ -45,6 +45,16 @@ dCleanLi.sort()
 sortedUniqueDescr= pd.Series(dCleanLi)
 sortedUniqueDescr.to_csv("data/SortedDescTraining50+.csv", sep = ";" ,index = 0 , encoding  = "utf-8") 
 
+with open("data/CountInTrain.txt","w") as f :
+    f.write('\n'.join([';'.join([key,value]) for (key,value) in d.items()]) )
+
+#TO DO : merge script 2 and 2 bis : 
+#take all the words
+#make script 2-bis
+#change the last loop with the condition : if(wordfreq < wordfreq2) [not mandatory, but can bee cool]
+#remove the cluster where the most frequent word has a frenquency of less than 10 or 20
+#merge the words from the dict created and the data base
+#hope this is better in a true CV (script 4) :-)
 
 #
 ####
